@@ -1,0 +1,40 @@
+/* Slate theme from Bootswatch (minified, v5) */
+@import url('https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/slate/bootstrap.min.css');
+
+body {
+  background: #272b30;
+  color: #fff;
+}
+
+.login-container, .register-container {
+  background: #23272b;
+}
+
+.login-form, .register-form {
+  background: #343a40;
+  color: #fff;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+}
+
+.login-form h2, .register-form h2 {
+  color: #fff;
+}
+
+.form-group input {
+  background: #23272b;
+  color: #fff;
+  border: 1px solid #495057;
+}
+
+.form-group input:focus {
+  border-color: #6c757d;
+}
+
+.login-btn, .register-btn {
+  background: #495057;
+  color: #fff;
+}
+
+.login-btn:hover, .register-btn:hover {
+  background: #6c757d;
+}
