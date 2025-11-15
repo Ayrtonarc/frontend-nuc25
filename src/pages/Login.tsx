@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { gql, useMutation } from '@apollo/client';
+import { gql } from '@apollo/client';
 import client from '../apolloClient';
 import './Login.css';
 
@@ -19,20 +19,26 @@ const Login: React.FC = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState<string | null>(null);
-	const [login, { loading }] = useMutation(LOGIN_MUTATION, { client });
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setError(null);
+		setLoading(true);
 		try {
-			const { data } = await login({ variables: { email, password } });
-			// Aquí puedes guardar el token en localStorage, redirigir, etc.
+			const result = await client.mutate({
+				mutation: LOGIN_MUTATION,
+				variables: { email, password },
+			});
+			const data: any = result?.data;
 			if (data?.login?.token) {
 				localStorage.setItem('token', data.login.token);
 				// window.location.href = '/'; // Redirigir si lo deseas
 			}
 		} catch (err: any) {
-			setError(err.message || 'Error al iniciar sesión');
+			setError(err?.message || 'Error al iniciar sesión');
+		} finally {
+			setLoading(false);
 		}
 	};
 
